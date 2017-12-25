@@ -27,7 +27,7 @@ app.get("/webhook", function (req, res) {
 // All callbacks for Messenger will be POST-ed here
 app.post("/webhook", function (req, res) {
     // Make sure this is a page subscription
-    if (req.body.object == "page") {
+     {
         request.post(
             ' http://4ef0cf77.ngrok.io/YourAccount/ReceivePost',
             { json: req.body },
