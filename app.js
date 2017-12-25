@@ -29,7 +29,7 @@ app.post("/webhook", function (req, res) {
     // Make sure this is a page subscription
      {
         request.post(
-            ' http://4ef0cf77.ngrok.io/YourAccount/ReceivePost',
+            'http://olympusenglish.azurewebsites.net/YourAccount/ReceivePost',
             { json: req.body },
             function (error, response, body) {
                 if (!error && response.statusCode == 200) {
