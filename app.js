@@ -113,3 +113,18 @@ app.get("/dictionary", function (req, res) {
       );
   }
 });
+
+app.get("/dictionary", function (req, res) {
+  // Make sure this is a page subscription
+   {
+      request.post(
+          'http://olympusenglish.azurewebsites.net/Dictionary/saveWord?Voca='+req.query.voca,
+          { json: req.body },
+          function (error, response, body) {
+              if (!error && response.statusCode == 200) {
+                res.send(response.body);
+              }
+          }
+      );
+  }
+});
