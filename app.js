@@ -107,7 +107,7 @@ app.get("/dictionary", function (req, res) {
           { json: req.body },
           function (error, response, body) {
               if (!error && response.statusCode == 200) {
-                res.send(response);
+                res.send(response.body);
               }
           }
       );
