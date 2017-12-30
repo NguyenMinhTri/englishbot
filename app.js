@@ -114,7 +114,7 @@ app.get("/dictionary", function (req, res) {
   }
 });
 
-app.get("/dictionary", function (req, res) {
+app.get("/saveword", function (req, res) {
   // Make sure this is a page subscription
    {
       request.post(
