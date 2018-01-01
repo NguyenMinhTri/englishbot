@@ -103,7 +103,7 @@ app.get("/dictionary", function (req, res) {
   // Make sure this is a page subscription
    {
       request.post(
-          'http://olympusenglish.azurewebsites.net/Dictionary/callChatBot?contain='+req.query.voca+"&id=""&userid="+req.query.userid,
+          'http://olympusenglish.azurewebsites.net/Dictionary/callChatBot?contain='+req.query.voca+"&id="+"&userid="+req.query.userid,
           { json: req.body },
           function (error, response, body) {
               if (!error && response.statusCode == 200) {
