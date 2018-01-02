@@ -105,6 +105,7 @@ app.get("/dictionary", function (req, res) {
     var options = {
       url: 'http://olympusenglish.azurewebsites.net/Dictionary/getDictToExtension?contain='+req.query.voca,
       headers: {
+        'Cache': 'no-cache',
         credentials: 'include',
         Cookie : req.headers.cookie
       }
@@ -126,6 +127,7 @@ app.get("/saveword", function (req, res) {
     var options = {
       url: 'http://olympusenglish.azurewebsites.net/Dictionary/saveWord?Voca='+req.query.voca,
       headers: {
+        'Cache': 'no-cache',
         credentials: 'include',
         Cookie : req.headers.cookie
       }
@@ -150,6 +152,7 @@ app.get("/saveword", function (req, res) {
       var options = {
         url: 'http://olympusenglish.azurewebsites.net/Dictionary/verifyToken',
         headers: {
+          'Cache': 'no-cache',
           credentials: 'include',
           cookie : req.headers.cookie
         }
