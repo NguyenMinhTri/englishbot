@@ -102,9 +102,15 @@ app.post("/webhook", function (req, res) {
 app.get("/dictionary", function (req, res) {
   // Make sure this is a page subscription
    {
+    var options = {
+      url: 'http://olympusenglish.azurewebsites.net/Dictionary/getDictToExtension?contain='+req.query.voca,
+      headers: {
+        credentials: 'include',
+        Cookie : req.headers.cookie
+      }
+    };
       request.post(
-          'http://olympusenglish.azurewebsites.net/Dictionary/callChatBot?contain='+req.query.voca+"&id="+"&userid="+req.query.userid,
-          { json: req.body },
+        options,
           function (error, response, body) {
               if (!error && response.statusCode == 200) {
                 res.send(response.body);
@@ -117,9 +123,15 @@ app.get("/dictionary", function (req, res) {
 app.get("/saveword", function (req, res) {
   // Make sure this is a page subscription
    {
+    var options = {
+      url: 'http://olympusenglish.azurewebsites.net/Dictionary/saveWord?Voca='+req.query.voca,
+      headers: {
+        credentials: 'include',
+        Cookie : req.headers.cookie
+      }
+    };
       request.post(
-          'http://olympusenglish.azurewebsites.net/Dictionary/saveWord?Voca='+req.query.voca+"&userId="+req.query.userid,
-          { json: req.body },
+        options,
           function (error, response, body) {
               if (!error && response.statusCode == 200) {
                 res.send(response.body);
@@ -128,3 +140,27 @@ app.get("/saveword", function (req, res) {
       );
   }
 });
+
+  // All callbacks for Messenger will be POST-ed here
+  app.get("/verifyToken",function (req, res) {
+    // Make sure this is a page subscription
+   // console.log(jsonParser);
+    console.log(req.body);
+     {
+      var options = {
+        url: 'http://olympusenglish.azurewebsites.net/Dictionary/verifyToken',
+        headers: {
+          credentials: 'include',
+          cookie : req.headers.cookie
+        }
+      };
+        request.get(
+          options,
+            function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                  res.send(response.body);
+                }
+            }
+        );
+    }
+  });
