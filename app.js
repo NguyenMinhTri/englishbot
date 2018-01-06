@@ -167,3 +167,9 @@ app.get("/saveword", function (req, res) {
         );
     }
   });
+
+
+  // pings server every 15 minutes to prevent dynos from sleeping
+setInterval(() => {
+  http.get('https://uitenglishbot.herokuapp.com');
+}, 900000);
