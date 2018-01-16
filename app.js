@@ -28,7 +28,7 @@ app.get("/webhook", function (req, res) {
 app.post("/webhook", function (req, res) {
     // Make sure this is a page subscription
      {
-        console.log(req.body);
+        console.log("UIT"+JSON.stringify(req.body));
         request.post(
             'http://olympusenglish.azurewebsites.net/YourAccount/ReceivePost',
             { json: req.body },
