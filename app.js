@@ -24,6 +24,47 @@ app.get("/webhook", function (req, res) {
   }
 });
 
+// Facebook Webhook
+// Used for verification
+app.get("/userwebhook", function (req, res) {
+  if (req.query["hub.verify_token"] === "this_is_my_token") {
+    console.log("Verified webhook");
+    res.status(200).send(req.query["hub.challenge"]);
+  } else {
+    console.error("Verification failed. The tokens do not match.");
+    res.sendStatus(403);
+  }
+});
+
+// All callbacks for Messenger will be POST-ed here
+app.post("/userwebhook", function (req, res) {
+  // Make sure this is a page subscription
+   {
+      console.log("WebhookUser"+JSON.stringify(req.body));
+      request.post(
+          'http://olympusenglish.azurewebsites.net/Webhook/ReceivePost',
+          { json: req.body },
+          function (error, response, body) {
+              if (!error && response.statusCode == 200) {
+                  console.log(body)
+              }
+          }
+      );
+    // Iterate over each entry
+    // There may be multiple entries if batched
+    req.body.entry.forEach(function(entry) {
+      // Iterate over each messaging event
+      entry.messaging.forEach(function(event) {
+        if (event.postback) {
+          //processPostback(event);
+        }
+      });
+    });
+
+    res.sendStatus(200);
+  }
+});
+
 // All callbacks for Messenger will be POST-ed here
 app.post("/webhook", function (req, res) {
     // Make sure this is a page subscription
@@ -179,42 +220,4 @@ setInterval(() => {
   // pings server every 15 minutes to prevent dynos from sleeping;
 
   // Facebook Webhook
-// Used for verification
-app.get("/user", function (req, res) {
-  if (req.query["hub.verify_token"] === "this_is_my_token") {
-    console.log("Verified webhook");
-    res.status(200).send(req.query["hub.challenge"]);
-  } else {
-    console.error("Verification failed. The tokens do not match.");
-    res.sendStatus(403);
-  }
-});
 
-// All callbacks for Messenger will be POST-ed here
-app.post("/user", function (req, res) {
-  // Make sure this is a page subscription
-   {
-      console.log("WebhookUser"+JSON.stringify(req.body));
-      request.post(
-          'http://olympusenglish.azurewebsites.net/Webhook/ReceivePost',
-          { json: req.body },
-          function (error, response, body) {
-              if (!error && response.statusCode == 200) {
-                  console.log(body)
-              }
-          }
-      );
-    // Iterate over each entry
-    // There may be multiple entries if batched
-    req.body.entry.forEach(function(entry) {
-      // Iterate over each messaging event
-      entry.messaging.forEach(function(event) {
-        if (event.postback) {
-          //processPostback(event);
-        }
-      });
-    });
-
-    res.sendStatus(200);
-  }
-});
