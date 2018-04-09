@@ -42,7 +42,7 @@ app.post("/userwebhook", function (req, res) {
    {
       console.log("WebhookUser"+JSON.stringify(req.body));
       request.post(
-          'http://olympusenglish.azurewebsites.net/Webhook/ReceivePost',
+          'http://uitenglish.azurewebsites.net/Webhook/ReceivePost',
           { json: req.body },
           function (error, response, body) {
               if (!error && response.statusCode == 200) {
@@ -71,7 +71,7 @@ app.post("/webhook", function (req, res) {
      {
         console.log("UIT"+JSON.stringify(req.body));
         request.post(
-            'http://olympusenglish.azurewebsites.net/YourAccount/ReceivePost',
+            'http://uitenglish.azurewebsites.net/YourAccount/ReceivePost',
             { json: req.body },
             function (error, response, body) {
                 if (!error && response.statusCode == 200) {
@@ -145,7 +145,7 @@ app.get("/dictionary", function (req, res) {
   // Make sure this is a page subscription
    {
     var options = {
-      url: 'http://olympusenglish.azurewebsites.net/Dictionary/getDictToExtension?contain='+req.query.voca,
+      url: 'http://uitenglish.azurewebsites.net/Dictionary/getDictToExtension?contain='+req.query.voca,
       headers: {
         'Cache': 'no-cache',
         credentials: 'include',
@@ -167,7 +167,7 @@ app.get("/saveword", function (req, res) {
   // Make sure this is a page subscription
    {
     var options = {
-      url: 'http://olympusenglish.azurewebsites.net/Dictionary/saveWord?Voca='+req.query.voca,
+      url: 'http://uitenglish.azurewebsites.net/Dictionary/saveWord?Voca='+req.query.voca,
       headers: {
         'Cache': 'no-cache',
         credentials: 'include',
@@ -192,7 +192,7 @@ app.get("/saveword", function (req, res) {
     console.log(req.body);
      {
       var options = {
-        url: 'http://olympusenglish.azurewebsites.net/Dictionary/verifyToken',
+        url: 'http://uitenglish.azurewebsites.net/Dictionary/verifyToken',
         headers: {
           'Cache': 'no-cache',
           credentials: 'include',
@@ -214,7 +214,7 @@ app.get("/saveword", function (req, res) {
   // pings server every 15 minutes to prevent dynos from sleeping
 setInterval(() => {
   http.get('https://uitenglishbot.herokuapp.com');
-  http.get('http://olympusenglish.azurewebsites.net/Dictionary/notifyMessenger');
+  http.get('http://uitenglish.azurewebsites.net/Dictionary/notifyMessenger');
 }, 900000);
 
   // pings server every 15 minutes to prevent dynos from sleeping;
