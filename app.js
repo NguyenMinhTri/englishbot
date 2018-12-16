@@ -6,11 +6,12 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 5000));
+app.use(express.static('public'))
 
 // Server index page
-app.get("/", function (req, res) {
-  res.send("Deployed!");
-});
+app.get("/", (request, response) => {
+  response.sendFile(__dirname + '/views/index.html')
+})
 
 // Facebook Webhook
 // Used for verification
