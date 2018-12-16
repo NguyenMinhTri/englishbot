@@ -53,12 +53,24 @@
         js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'Messenger'));
+      window.extAsyncInit = function() {
+	document.getElementById('header').innerHTML = "loaded";
+ 	MessengerExtensions.getUserID(function success(uids) {
+        var psid = uids.psid;
+        document.getElementById('header').innerHTML = "" + psid;
+      }, function error(err) {
+          document.getElementById('header').innerHTML = 'error: ' + err;
+      });
+}
     </script>
     
     <main>
       <img src="https://media.giphy.com/media/5wWf7GW1AzV6pF3MaVW/giphy.gif" title="High five" />
     </main>
-    
+    <h1 id="header">result</h1>
+    <h1 id="header2"></h1>
+    <button onclick="requestPayment()">Get Credentials</button>
+    <button onclick="authorizePayment()">Authorize Payment</button>
       <h2>
         What do you like?
       </h2>
