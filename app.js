@@ -10,7 +10,7 @@ app.use(express.static('public'))
 
 // Server index page
 app.get("/", (request, response) => {
-  response.sendFile(__dirname + '/views/index.html')
+  response.sendFile(__dirname + '/views/webview.html')
 })
 // Simple in-memory store
 const dreams = [
